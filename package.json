@@ -1,0 +1,62 @@
+{
+  "name": "react-gulp",
+  "version": "1.0.0",
+  "description": "React Gulp Starter project",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/terryx/react-gulp.git"
+  },
+  "keywords": [
+    "react",
+    "gulp",
+    "starter",
+    "reactify",
+    "browserify"
+  ],
+  "author": "Terry Yuen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/terryx/react-gulp/issues"
+  },
+  "homepage": "https://github.com/terryx/react-gulp",
+  "devDependencies": {
+    "browser-sync": "^2.6.3",
+    "browserify": "^9.0.3",
+    "compression": "^1.4.1",
+    "connect-modrewrite": "^0.7.11",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-gzip": "^1.1.0",
+    "gulp-htmlmin": "^1.1.1",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-inject": "^1.2.0",
+    "gulp-less": "^3.0.2",
+    "gulp-minify-css": "^1.0.0",
+    "gulp-rev": "^3.0.1",
+    "gulp-sourcemaps": "^1.5.1",
+    "gulp-uglify": "^1.1.0",
+    "gulp-uncss": "^1.0.1",
+    "gulp-useref": "^1.1.2",
+    "imagemin-pngquant": "^4.0.0",
+    "lodash.assign": "^3.0.0",
+    "proxy-middleware": "^0.11.0",
+    "reactify": "^1.0.0",
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.0.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "react": "^0.13.1"
+  }
+}
