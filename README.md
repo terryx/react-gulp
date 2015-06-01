@@ -1,11 +1,8 @@
 # react-gulp
 React Gulp starter project that optimize for performance
 
-##### **Clean setup**
-    gulp base
-
 ##### **Development Mode**
-    gulp serve
+    gulp dev
 
-##### **Build for Production**
+##### **Build for Production / First time setup **
     gulp build
