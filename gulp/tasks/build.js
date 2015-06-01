@@ -36,7 +36,7 @@ gulp.task('build:js', function() {
 
   // add transformations here
   // i.e. b.transform(coffeeify);
-  b.transform([reactify, babelify]);
+  b.transform([babelify, reactify]);
 
   function bundle() {
     return b.bundle()
