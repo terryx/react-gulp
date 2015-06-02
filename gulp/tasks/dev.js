@@ -20,6 +20,7 @@ var watch = require('gulp-watch');
 var config = require('../config');
 var less = require('gulp-less');
 var concat = require('gulp-concat');
+var reload = require('browser-sync').reload;
 
 gulp.task('dev:js', function() {
 
@@ -56,21 +57,21 @@ gulp.task('dev:js', function() {
 });
 
 gulp.task('dev:less', function() {
-  watch(config.css.src, function() {
-    return gulp.src(config.css.src)
-      .pipe(watch(config.css.src))
-      .pipe(less())
-      .pipe(concat(config.css.bundle))
-      .pipe(gulp.dest(config.css.dist))
-  })
+  return gulp.src(config.css.src)
+    .pipe(less())
+    .pipe(concat(config.css.bundle))
+    .pipe(gulp.dest(config.css.dist))
+    .pipe(reload({
+      stream: true
+    }));
 });
 
 gulp.task('dev:html', function() {
-  watch(config.html.src, function() {
-    return gulp.src(config.html.src)
-      .pipe(watch(config.html.src))
-      .pipe(gulp.dest(config.html.dist))
-  })
+  return gulp.src(config.html.src)
+    .pipe(gulp.dest(config.html.dist))
+    .pipe(reload({
+      stream: true
+    }));
 });
 
 gulp.task('browserSync', function() {
@@ -89,4 +90,13 @@ gulp.task('browserSync', function() {
       middleware: middleWares
     }
   });
+  
+  // var connect = require('gulp-connect')
+  // connect.server({
+  //   root: config.dist,
+  //   livereload: true
+  // });
+
+  gulp.watch([config.css.src], ['dev:less']);
+  gulp.watch([config.html.src], ['dev:html']);
 });
