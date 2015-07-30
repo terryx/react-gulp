@@ -1,8 +1,10 @@
 # react-gulp
 React Gulp starter project that optimize for performance
 
-##### **Development Mode**
-    npm start
+##### 3 easy steps to kick start
+1. Make sure that `npm` is installed
+2. run the command `npm install` to grab required dependencies
+3. run `npm start` to start coding ~!
 
-##### **Build for Production / First time setup **
+##### **Production build**
     npm run build
