@@ -1,13 +1,10 @@
 var gulp = require('gulp');
 var watchify = require('watchify');
 var browserify = require('browserify');
-var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
-var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash.assign');
-var reactify = require('reactify');
 var babelify = require('babelify');
 var uglify = require('gulp-uglify');
 var minifyHTML = require('gulp-minify-html');
@@ -20,11 +17,11 @@ var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var del = require('del');
 
-gulp.task('clean', function(){
+gulp.task('clean', function () {
   del.sync([config.dist]);
 });
 
-gulp.task('build:js', function() {
+gulp.task('build:js', function () {
 
   // add custom browserify options here
   var customOpts = {
@@ -36,15 +33,13 @@ gulp.task('build:js', function() {
 
   // add transformations here
   // i.e. b.transform(coffeeify);
-  b.transform([babelify, reactify]);
+  b.transform([babelify]);
 
-  function bundle() {
-    return b.bundle()
-      .pipe(source(config.js.bundle))
-      .pipe(buffer())
-      .pipe(uglify())
-      .pipe(gulp.dest(config.js.dist))
-  }
+  return b.bundle()
+    .pipe(source(config.js.bundle))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest(config.js.dist))
 
   bundle();
 });
@@ -54,22 +49,25 @@ gulp.task('build:less', function () {
     .pipe(less())
     .pipe(concat(config.css.bundle))
     .pipe(minifyCSS())
-    .pipe(autoprefixer({cascade: false, browsers: ['last 2 versions']}))
+    .pipe(autoprefixer({
+      cascade: false,
+      browsers: ['last 2 versions']
+    }))
     .pipe(gulp.dest(config.css.dist))
 });
 
-gulp.task('build:html', function() {
+gulp.task('build:html', function () {
   return gulp.src(config.html.src)
     .pipe(minifyHTML())
     .pipe(gulp.dest(config.html.dist))
 });
 
-gulp.task('build:ico', function() {
+gulp.task('build:ico', function () {
   return gulp.src(config.src + '/*.ico')
     .pipe(gulp.dest(config.dist))
 });
 
-gulp.task('build:img', function() {
+gulp.task('build:img', function () {
   return gulp.src(config.img.src)
     .pipe(imagemin({
       progressive: true,

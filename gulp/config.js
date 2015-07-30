@@ -8,7 +8,7 @@ config.dist = dist;
 
 config.js = {
   bundle: 'app.js',
-  src: src + '/js/app.js',
+  src: src + '/js/app.jsx',
   dist: dist + '/js'
 };
 
@@ -28,6 +28,7 @@ config.img = {
   dist: dist + '/img'
 }
 
+//specify your own local server settings
 config.browserSync = {
   apiServer: {
     url: 'http://localhost:1500/api',

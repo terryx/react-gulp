@@ -2,7 +2,7 @@
 React Gulp starter project that optimize for performance
 
 ##### **Development Mode**
-    gulp
+    `npm start`
 
 ##### **Build for Production / First time setup **
-    gulp build
+    `npm run build`

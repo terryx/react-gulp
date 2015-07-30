@@ -1,28 +1,22 @@
+var config = require('../config');
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var watchify = require('watchify');
 var browserify = require('browserify');
-var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
-var plumber = require('gulp-plumber');
 var gutil = require('gulp-util');
-var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash.assign');
 var proxy = require('proxy-middleware');
-var compression = require('compression');
-var reactify = require('reactify');
 var babelify = require('babelify');
 var url = require('url');
-var uglify = require('gulp-uglify');
-var minifyHTML = require('gulp-minify-html');
-var watch = require('gulp-watch');
-var config = require('../config');
 var less = require('gulp-less');
 var concat = require('gulp-concat');
 var reload = require('browser-sync').reload;
 
-gulp.task('dev:js', function() {
+//modify shamelessly from
+//https://github.com/gulpjs/gulp/blob/master/docs/recipes/fast-browserify-builds-with-watchify.md
+gulp.task('develop:jsx', function () {
 
   // add custom browserify options here
   var customOpts = {
@@ -34,7 +28,7 @@ gulp.task('dev:js', function() {
 
   // add transformations here
   // i.e. b.transform(coffeeify);
-  b.transform([babelify, reactify]);
+  b.transform([babelify]);
 
   b.on('update', bundle); // on any dep update, runs the bundler
   b.on('log', gutil.log); // output build logs to terminal
@@ -42,7 +36,7 @@ gulp.task('dev:js', function() {
   function bundle() {
     return b.bundle()
       // log errors if they happen
-      .on('error', function(err) {
+      .on('error', function (err) {
         delete err.stream;
         console.log(err)
       })
@@ -56,7 +50,7 @@ gulp.task('dev:js', function() {
 
 });
 
-gulp.task('dev:less', function() {
+gulp.task('develop:less', function () {
   return gulp.src(config.css.src)
     .pipe(less())
     .pipe(concat(config.css.bundle))
@@ -66,7 +60,7 @@ gulp.task('dev:less', function() {
     }));
 });
 
-gulp.task('dev:html', function() {
+gulp.task('develop:html', function () {
   return gulp.src(config.html.src)
     .pipe(gulp.dest(config.html.dist))
     .pipe(reload({
@@ -74,7 +68,7 @@ gulp.task('dev:html', function() {
     }));
 });
 
-gulp.task('browserSync', function() {
+gulp.task('browserSync', function () {
 
   var apiServer = url.parse(config.browserSync.apiServer.url);
   apiServer.route = config.browserSync.apiServer.route;
@@ -90,13 +84,7 @@ gulp.task('browserSync', function() {
       middleware: middleWares
     }
   });
-  
-  // var connect = require('gulp-connect')
-  // connect.server({
-  //   root: config.dist,
-  //   livereload: true
-  // });
 
-  gulp.watch([config.css.src], ['dev:less']);
-  gulp.watch([config.html.src], ['dev:html']);
+  gulp.watch([config.css.src], ['develop:less']);
+  gulp.watch([config.html.src], ['develop:html']);
 });
