@@ -9,7 +9,6 @@ class Main extends React.Component {
       <div>{this.props.greeting}</div>
     )
   }
-
 }
 
 Main.propTypes = {

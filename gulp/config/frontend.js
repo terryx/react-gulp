@@ -1,14 +1,16 @@
 var config = {};
 
-var src = './app/src';
-var dist = './app/dist';
+var src = './frontend/src';
+var dist = './frontend/dist';
+var release = './frontend/release';
 
 config.src = src;
 config.dist = dist;
+config.release = release;
 
 config.js = {
   bundle: 'app.js',
-  src: src + '/js/app.jsx',
+  src: src + '/js/app.js',
   dist: dist + '/js'
 };
 

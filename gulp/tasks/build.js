@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var config = require('../config/frontend');
 var watchify = require('watchify');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
@@ -8,7 +9,6 @@ var assign = require('lodash.assign');
 var babelify = require('babelify');
 var uglify = require('gulp-uglify');
 var minifyHTML = require('gulp-minify-html');
-var config = require('../config');
 var less = require('gulp-less');
 var concat = require('gulp-concat');
 var minifyCSS = require('gulp-minify-css');
@@ -17,8 +17,12 @@ var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var del = require('del');
 
-gulp.task('clean', function () {
+gulp.task('clean:dist', function () {
   del.sync([config.dist]);
+});
+
+gulp.task('clean:release', function () {
+  del.sync([config.release]);
 });
 
 gulp.task('build:js', function () {
@@ -40,8 +44,6 @@ gulp.task('build:js', function () {
     .pipe(buffer())
     .pipe(uglify())
     .pipe(gulp.dest(config.js.dist))
-
-  bundle();
 });
 
 gulp.task('build:less', function () {
@@ -77,4 +79,9 @@ gulp.task('build:img', function () {
       use: [pngquant()]
     }))
     .pipe(gulp.dest(config.img.dist));
+});
+
+gulp.task('build:release', function() {
+  return gulp.src(config.dist + '/**')
+    .pipe(gulp.dest(config.release));
 });

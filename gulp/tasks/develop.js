@@ -1,4 +1,4 @@
-var config = require('../config');
+var config = require('../config/frontend');
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var watchify = require('watchify');
@@ -13,10 +13,15 @@ var url = require('url');
 var less = require('gulp-less');
 var concat = require('gulp-concat');
 var reload = require('browser-sync').reload;
+var del = require('del');
+
+gulp.task('develop:clean', function () {
+  del.sync([config.dist]);
+});
 
 //modify shamelessly from
 //https://github.com/gulpjs/gulp/blob/master/docs/recipes/fast-browserify-builds-with-watchify.md
-gulp.task('develop:jsx', function () {
+gulp.task('develop:js', function () {
 
   // add custom browserify options here
   var customOpts = {
